@@ -16,4 +16,4 @@ The available components are:
 
 1. Useage
 
-   * buildall.sh hadoop_version hadoop_tag hbase_version
+   * `buildall.sh $hadoop_version $hadoop_tag $hbase_version`
