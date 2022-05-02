@@ -8,6 +8,7 @@ if [ $# -gt 0 ]; then
     else
         HADOOP_TAG=${HADOOP_TAG:-"latest"}
     fi
+    HBASE_VERSION=$3
 fi
 
 if [ -z ${HADOOP_VERSION+x} ]; then
@@ -15,8 +16,13 @@ if [ -z ${HADOOP_VERSION+x} ]; then
   exit 1
 fi
 
-for i in hadoop namenode datanode ; do
+for i in hadoop namenode datanode hbase; do
     echo Building $i
-    [ "$i" = "hadoop" ] && name="hadoop" || name="hadoop-$i"
-    ( cd $i && docker build --build-arg HADOOP_VERSION=$HADOOP_VERSION --build-arg HADOOP_TAG=$HADOOP_TAG -t $name:$HADOOP_TAG . )
+
+    if [ "$i" != "hbase" ]; then
+         [ "$i" = "hadoop" ] && name="hadoop" || name="hadoop-$i"
+         ( cd $i && docker build --build-arg HADOOP_VERSION=$HADOOP_VERSION --build-arg HADOOP_TAG=$HADOOP_TAG -t $name:$HADOOP_TAG . )
+    else
+         ( cd $i && docker build --build-arg HADOOP_VERSION=$HADOOP_VERSION --build-arg HADOOP_TAG=$HADOOP_TAG --build-arg HBASE_VERSION=$HBASE_VERSION -t hbase:$HBASE_VERSION . )
+    fi
 done
