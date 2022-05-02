@@ -10,5 +10,10 @@ The available components are:
    
 1. *hbase*:
    
-   * *nodemanager*
+   * *hmaster*
+   * *regionserver*
 
+
+1. Useage
+
+   * buildall.sh hadoop_version hadoop_tag hbase_version
