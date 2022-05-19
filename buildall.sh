@@ -26,4 +26,3 @@ for i in hadoop namenode datanode client hbase; do
          ( cd $i && docker build --build-arg HADOOP_VERSION=$HADOOP_VERSION --build-arg HADOOP_TAG=$HADOOP_TAG --build-arg HBASE_VERSION=$HBASE_VERSION -t hbase:$HBASE_VERSION . )
     fi
 done
-docker build --build-arg HADOOP_VERSION=2.7.3 --build-arg HADOOP_TAG=2.7.3 -t hadoop-client:2.7.3 . 
